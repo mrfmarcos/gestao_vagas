@@ -23,4 +23,4 @@ jobs:
       - name: Build docker image
         run: docker build -t mrfmarcos/gestao_vagas .
       - name: Publish image
-        run: docker push rfmarcos/gestao_vagas
+        run: docker push mrfmarcos/gestao_vagas
