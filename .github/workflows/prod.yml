@@ -24,3 +24,14 @@ jobs:
         run: docker build -t mrfmarcos/gestao_vagas .
       - name: Publish image
         run: docker push mrfmarcos/gestao_vagas
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image docker hub
+        run: docker pull mrfmarcos/gestao_vagas
+      - name: remove container
+        run: docker rm -f 
+      - name: Run docker container gestao_vagas
+        run: docker run -d -p 8080:8080 -e DATABASE_URL=${{secrets.DATABASE_URL}} -e DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}} -e DATABASE_USERNAME = ${{secrets.DATABASE_USERNAME}} --name gestao_vagas mrfmarcos/gestao_vagas:latest
+    
