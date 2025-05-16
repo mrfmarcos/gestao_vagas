@@ -45,12 +45,12 @@ jobs:
         run: docker pull mrfmarcos/gestao_vagas:latest
 
       - name: Remove existing container (if any)
-        run: docker rm -f gestao-vagas || true
+        run: docker rm -f gestao_vagas || true
 
-      - name: Run Docker container gestao-vagas
+      - name: Run Docker container gestao_vagas
         run: |
           docker run -d -p 8080:8080 \
             -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
-            -e DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} \
+            -e DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}' \
             -e DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} \
             --name gestao-vagas mrfmarcos/gestao_vagas:latest
